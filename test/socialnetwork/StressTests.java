@@ -64,7 +64,7 @@ public class StressTests {
 
   private void runExperiment(ExperimentSettings settings) {
     // TODO replace by your Backlog implementation
-    Backlog backlog = null;
+    Backlog backlog = new CoarseBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
 
     Worker[] workers = new Worker[settings.nWorkers];
@@ -85,8 +85,8 @@ public class StressTests {
     Arrays.stream(userThreads)
         .forEach(
             u -> {
-              // TODO add your own board implementation
-              socialNetwork.register(u, null);
+              Board board = new CoarseBoard();
+              socialNetwork.register(u, board);
               u.start();
             });
 

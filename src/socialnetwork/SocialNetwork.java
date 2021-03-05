@@ -34,7 +34,7 @@ public class SocialNetwork {
     List<User> allRecipients = new ArrayList<>(recipients.size() + 1);
     allRecipients.add(sender);
     allRecipients.addAll(recipients);
-    allRecipients.stream()
+    allRecipients
         .forEach(
             r -> {
               checkUserRegistered(r);

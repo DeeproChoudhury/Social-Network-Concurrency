@@ -1,5 +1,6 @@
 package socialnetwork;
 
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class User extends Thread {
@@ -21,8 +22,9 @@ public class User extends Thread {
   }
 
   @Override
-  public void run() {
-    // Implement here
+  synchronized public void run() {
+    Set<User> socialNetworkUsers = socialNetwork.getAllUsers();
+
   }
 
   @Override

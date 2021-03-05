@@ -20,8 +20,8 @@ public class BasicTests {
   @Test
   public void testRegistration() {
     // TODO replace null here by your implementation of Board and Backlog
-    Backlog backlog = null;
-    Board board = null;
+    Board board = new CoarseBoard();
+    Backlog backlog = new CoarseBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
     User user = new User("test", socialNetwork);
     socialNetwork.register(user, board);
