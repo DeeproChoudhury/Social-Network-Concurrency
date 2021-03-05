@@ -24,11 +24,11 @@ public class FineBacklog implements Backlog {
 
   @Override
   public Optional<Task> getNextTaskToProcess() {
-    Optional<Task> nextTask = fineSequentialSet.poll();
-    if(SocialNetwork.DEBUG) {
-      System.out.println("Task::Poll::" + nextTask);
-    }
-    return nextTask;
+      Optional<Task> nextTask = fineSequentialSet.poll();
+      if (SocialNetwork.DEBUG) {
+        System.out.println("Task::Poll::" + nextTask);
+      }
+      return nextTask;
   }
 
   @Override

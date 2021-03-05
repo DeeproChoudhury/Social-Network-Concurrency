@@ -21,25 +21,25 @@ import socialnetwork.domain.Worker;
 public class StressTests {
 
   @Test
-  public void testSmallParams() {
+  public void testSmallParamsFine() {
     ExperimentSettings settings = new ExperimentSettings(1, 5, 50, 3, 123456);
     runExperiment(settings);
   }
 
   @Test
-  public void testMediumParams() {
+  public void testMediumParamsFine() {
     ExperimentSettings settings = new ExperimentSettings(3, 10, 50, 10, 123456);
     runExperiment(settings);
   }
 
   @Test
-  public void testSlightlyLargerParams() {
+  public void testSlightlyLargerParamsFine() {
     ExperimentSettings settings = new ExperimentSettings(5, 40, 75, 15, 123456);
     runExperiment(settings);
   }
 
   @Test
-  public void testLargeParams() {
+  public void testLargeParamsFine() {
     ExperimentSettings settings = new ExperimentSettings(10, 100, 100, 20, 123456);
     runExperiment(settings);
   }
@@ -64,7 +64,7 @@ public class StressTests {
 
   private void runExperiment(ExperimentSettings settings) {
     // TODO replace by your Backlog implementation
-    Backlog backlog = new CoarseBacklog();
+    Backlog backlog = new FineBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
 
     Worker[] workers = new Worker[settings.nWorkers];
@@ -85,7 +85,7 @@ public class StressTests {
     Arrays.stream(userThreads)
         .forEach(
             u -> {
-              Board board = new CoarseBoard();
+              Board board = new FineBoard();
               socialNetwork.register(u, board);
               u.start();
             });

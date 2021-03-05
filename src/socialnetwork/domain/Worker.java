@@ -7,6 +7,7 @@ public class Worker extends Thread {
 
   private final Backlog backlog;
   private boolean interrupted = false;
+  private final static int SLEEPVALUE = 10;
 
   public Worker(Backlog backlog) {
     this.backlog = backlog;
@@ -17,8 +18,13 @@ public class Worker extends Thread {
     while (!interrupted) {
       Optional<Task> nextTask = backlog.getNextTaskToProcess();
       if (nextTask.isPresent()) {
-        Task newTask = nextTask.get();
-        process(newTask);
+        process(nextTask.get());
+      } else {
+        try {
+          Thread.sleep(175);
+        } catch (InterruptedException e) {
+          interrupted = true;
+        }
       }
     }
   }
