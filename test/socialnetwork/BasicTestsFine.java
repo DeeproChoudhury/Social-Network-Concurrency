@@ -19,7 +19,6 @@ public class BasicTestsFine {
 
   @Test
   public void testRegistration() {
-    // TODO replace null here by your implementation of Board and Backlog
     Board board = new FineBoard();
     Backlog backlog = new FineBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
@@ -32,7 +31,6 @@ public class BasicTestsFine {
 
   @Test
   public void testMessageLifecycle() {
-    // TODO replace null here by your implementation of Board and Backlog
     Backlog backlog = new FineBacklog();
     Board board1 = new FineBoard();
     Board board2 = new FineBoard();

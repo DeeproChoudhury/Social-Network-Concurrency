@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 public class SequentialSet<E> {
 
   protected AtomicInteger size = new AtomicInteger(0);
-  private SequentialNode<E> head;
-  private SequentialNode<E> tail;
+  private final SequentialNode<E> head;
+  private final SequentialNode<E> tail;
   Function<E, Integer> idFunction;
 
   public SequentialSet(Function<E, Integer> idFunction) {

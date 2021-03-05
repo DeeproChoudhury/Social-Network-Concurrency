@@ -1,7 +1,5 @@
 package socialnetwork;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.List;
 import java.util.function.Function;
 import lineardatastructures.CoarseSet;

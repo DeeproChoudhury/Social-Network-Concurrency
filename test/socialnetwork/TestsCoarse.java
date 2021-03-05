@@ -15,11 +15,10 @@ import socialnetwork.domain.Task;
 import socialnetwork.domain.Task.Command;
 import socialnetwork.domain.Worker;
 
-public class BasicTestsCoarse {
+public class TestsCoarse {
   //Added by me to test coarse grained implementation separately
   @Test
   public void testRegistration() {
-    // TODO replace null here by your implementation of Board and Backlog
     Board board = new CoarseBoard();
     Backlog backlog = new CoarseBacklog();
     SocialNetwork socialNetwork = new SocialNetwork(backlog);
@@ -32,7 +31,6 @@ public class BasicTestsCoarse {
 
   @Test
   public void testMessageLifecycle() {
-    // TODO replace null here by your implementation of Board and Backlog
     Backlog backlog = new CoarseBacklog();
     Board board1 = new CoarseBoard();
     Board board2 = new CoarseBoard();
