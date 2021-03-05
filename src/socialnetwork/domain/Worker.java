@@ -7,7 +7,7 @@ public class Worker extends Thread {
 
   private final Backlog backlog;
   private boolean interrupted = false;
-  private final static int SLEEPVALUE = 10;
+  private final static int SLEEP_VALUE = 175;
 
   public Worker(Backlog backlog) {
     this.backlog = backlog;
@@ -21,7 +21,7 @@ public class Worker extends Thread {
         process(nextTask.get());
       } else {
         try {
-          Thread.sleep(175);
+          Thread.sleep(SLEEP_VALUE);
         } catch (InterruptedException e) {
           interrupted = true;
         }

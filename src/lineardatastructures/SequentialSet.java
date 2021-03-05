@@ -3,12 +3,14 @@ package lineardatastructures;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import socialnetwork.Node;
 
 public class SequentialSet<E> {
 
-  int size = 0;
+  protected AtomicInteger size = new AtomicInteger(0);
   private SequentialNode<E> head, tail;
   Function<E, Integer> idFunction;
 
@@ -40,7 +42,7 @@ public class SequentialSet<E> {
     }
     E oldValue = curr.item();
     pred.setNext(curr.next());
-    size--;
+    size.decrementAndGet();
     return Optional.of(oldValue);
   }
 
@@ -86,7 +88,7 @@ public class SequentialSet<E> {
     } else {
       node.setNext(where.curr);
       where.pred.setNext(node);
-      size += 1;
+      size.incrementAndGet();
       return true;
     }
   }
@@ -98,13 +100,24 @@ public class SequentialSet<E> {
       return false;
     } else {
       where.pred.setNext(where.curr.next());
-      size -= 1;
+      size.decrementAndGet();
       return true;
     }
   }
 
   public int size() {
-    return size;
+    return size.get();
+  }
+
+  public List<E> possibleSnapshot() {
+    List<SequentialNode<E>> snapshot = new ArrayList<>(size());
+    SequentialNode<E> curr = head;
+    while ((curr = curr.next()) != tail) {
+      snapshot.add(curr);
+    }
+    return snapshot.stream()
+        .map(SequentialNode::item)
+        .collect(Collectors.toList());
   }
 
 

@@ -18,7 +18,7 @@ import socialnetwork.domain.Board;
 import socialnetwork.domain.Message;
 import socialnetwork.domain.Worker;
 
-public class StressTests {
+public class StressTestsFine {
 
   @Test
   public void testSmallParamsFine() {

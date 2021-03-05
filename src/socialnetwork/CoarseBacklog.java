@@ -12,15 +12,12 @@ public class CoarseBacklog implements Backlog {
 
   @Override
   public void add(Task task) {
-//    Node<Task> newNode = new Node<Task>(task);
     coarseSet.add(task);
   }
 
   @Override
   public Optional<Task> getNextTaskToProcess() {
-    synchronized (this) {
       return coarseSet.poll();
-    }
   }
 
   @Override
@@ -28,7 +25,4 @@ public class CoarseBacklog implements Backlog {
     return coarseSet.size();
   }
 
-  private void resize() {
-
-  }
 }

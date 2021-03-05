@@ -32,6 +32,6 @@ public class CoarseBoard implements socialnetwork.domain.Board {
 
   @Override
   public List<Message> getBoardSnapshot() {
-    return coarseSet.getAllNodes();
+    return coarseSet.possibleSnapshot();
   }
 }

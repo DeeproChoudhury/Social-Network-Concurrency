@@ -74,7 +74,7 @@ public class MyLinkedList<E> {
     return size == 0;
   }
 
-  private class Node<E> {
+  private static class Node<E> {
 
     private E elem;
     private Node<E> next;

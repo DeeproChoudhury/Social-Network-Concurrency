@@ -149,7 +149,10 @@ public class FineSequentialSet<E> {
     while ((curr = curr.getNext()) != tail) {
       snapshot.add(curr);
     }
-    return snapshot.stream().filter(n -> n.isValid()).map(n -> n.item()).collect(Collectors.toList());
+    return snapshot.stream()
+        .filter(FineSequentialNode::isValid)
+        .map(FineSequentialNode::item)
+        .collect(Collectors.toList());
   }
 
   private static class Position<T> {

@@ -15,7 +15,7 @@ import socialnetwork.domain.Task;
 import socialnetwork.domain.Task.Command;
 import socialnetwork.domain.Worker;
 
-public class BasicTests {
+public class BasicTestsFine {
 
   @Test
   public void testRegistration() {
