@@ -4,11 +4,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class FineSequentialNode<E> {
-  private Lock lock = new ReentrantLock();
-  private E item;
-  private int key;
-  private volatile FineSequentialNode<E> next;
-  private volatile boolean valid;
+  private final Lock lock = new ReentrantLock();
+  private final E item;
+  private final int key;
+  private FineSequentialNode<E> next;
+  private boolean valid;
 
   public FineSequentialNode(E item, int key) {
     this(item, key, null);

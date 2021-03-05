@@ -6,12 +6,12 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import socialnetwork.Node;
 
 public class SequentialSet<E> {
 
   protected AtomicInteger size = new AtomicInteger(0);
-  private SequentialNode<E> head, tail;
+  private SequentialNode<E> head;
+  private SequentialNode<E> tail;
   Function<E, Integer> idFunction;
 
   public SequentialSet(Function<E, Integer> idFunction) {
@@ -19,14 +19,6 @@ public class SequentialSet<E> {
     head = new SequentialNode<>(null, Integer.MIN_VALUE, null);
     tail = new SequentialNode<>(null, Integer.MAX_VALUE, null);
     head.setNext(tail);
-  }
-
-  public E getFromPosition(int key) {
-    SequentialNode<E> curr = head;
-    while (curr != null && curr.key() != key) {
-      curr = curr.next();
-    }
-    return curr.item();
   }
 
   public Optional<E> poll() {
@@ -65,7 +57,7 @@ public class SequentialSet<E> {
     while(curr.key() < key) {
       pred = curr;
       curr = curr.next();
-    }  // until curr.key >= key
+    }
     if (pred == curr) {
       curr = curr.next();
     }

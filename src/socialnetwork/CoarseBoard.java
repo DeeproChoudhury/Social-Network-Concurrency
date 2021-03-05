@@ -8,11 +8,9 @@ import lineardatastructures.CoarseSet;
 import socialnetwork.domain.Message;
 
 public class CoarseBoard implements socialnetwork.domain.Board {
-  Lock lock = new ReentrantLock();
-  CoarseLinkedList<Message> LinkedList = new CoarseLinkedList<>(null, Message::getMessageId);
 
-  private final Function<Integer, Integer> maxIntMinus = e -> Integer.MAX_VALUE - e - 1;
-  CoarseSet<Message> coarseSet = new CoarseSet<>(maxIntMinus.compose(Message::getMessageId));
+  private final Function<Integer, Integer> decreasingOrder = i -> Integer.MAX_VALUE - i - 1;
+  CoarseSet<Message> coarseSet = new CoarseSet<>(decreasingOrder.compose(Message::getMessageId));
 
 
   @Override

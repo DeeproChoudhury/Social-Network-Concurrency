@@ -9,29 +9,29 @@ import socialnetwork.domain.Message;
 
 public class FineBoard implements Board {
 
-  private final Function<Integer, Integer> maxIntMinus = e -> Integer.MAX_VALUE - e - 1;
+  private final Function<Integer, Integer> decreasingOrder = i -> Integer.MAX_VALUE - i - 1;
 
-  private final FineSequentialSet<Message> fineSequentialSet =
-      new FineSequentialSet<>(maxIntMinus.compose(Message::getMessageId));
+  private final FineSequentialSet<Message> messageSet =
+      new FineSequentialSet<>(decreasingOrder.compose(Message::getMessageId));
 
   @Override
   public boolean addMessage(Message message) {
-    return fineSequentialSet.add(message);
+    return messageSet.add(message);
   }
 
   @Override
   public boolean deleteMessage(Message message) {
-    return fineSequentialSet.remove(message).isPresent();
+    return messageSet.remove(message).isPresent();
   }
 
   @Override
   public int size() {
-    return fineSequentialSet.size();
+    return messageSet.size();
   }
 
   @Override
   public List<Message> getBoardSnapshot() {
-    return fineSequentialSet.possibleSnapshot();
+    return messageSet.possibleSnapshot();
   }
 
   @Override

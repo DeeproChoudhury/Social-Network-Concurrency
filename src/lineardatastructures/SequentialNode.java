@@ -1,8 +1,6 @@
 package lineardatastructures;
 
-import socialnetwork.Node;
-
-public class SequentialNode<E>{
+public class SequentialNode<E> {
 
   private E item;
   protected int key;
