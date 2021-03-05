@@ -2,21 +2,17 @@ package lineardatastructures;
 
 import socialnetwork.Node;
 
-public class SequentialNode<E> implements NodeForSet<E>{
+public class SequentialNode<E>{
 
   private E item;
-  private int key;
-  private NodeForSet<E> next;
+  protected int key;
+  protected SequentialNode<E> next;
 
-  public SequentialNode(E item) {
-    this(item, null);
+  public SequentialNode(E item, int key) {
+    this(item, key, null);
   }
 
-  public SequentialNode(E item, NodeForSet<E> next) {
-    this(item, item.hashCode(), next);
-  }
-
-  protected SequentialNode(E item, int key, NodeForSet<E> next) {
+  protected SequentialNode(E item, int key, SequentialNode<E> next) {
     this.item = item;
     this.key = key;
     this.next = next;
@@ -30,7 +26,7 @@ public class SequentialNode<E> implements NodeForSet<E>{
     return key;
   }
 
-  public NodeForSet<E> next() {
+  public SequentialNode<E> next() {
     return next;
   }
 
@@ -42,7 +38,7 @@ public class SequentialNode<E> implements NodeForSet<E>{
     this.key = key;
   }
 
-  public void setNext(NodeForSet<E> next) {
+  public void setNext(SequentialNode<E> next) {
     this.next = next;
   }
 

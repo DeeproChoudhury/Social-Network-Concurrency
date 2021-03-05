@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface Backlog {
 
-  boolean add(Task task);
+  void add(Task task);
 
   Optional<Task> getNextTaskToProcess();
 

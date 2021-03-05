@@ -2,31 +2,52 @@ package lineardatastructures;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import socialnetwork.Node;
 
 public class SequentialSet<E> {
 
   int size = 0;
-  private NodeForSet<E> head, tail;
+  private SequentialNode<E> head, tail;
+  Function<E, Integer> idFunction;
 
-  public SequentialSet() {
+  public SequentialSet(Function<E, Integer> idFunction) {
+    this.idFunction = idFunction;
     head = new SequentialNode<>(null, Integer.MIN_VALUE, null);
     tail = new SequentialNode<>(null, Integer.MAX_VALUE, null);
     head.setNext(tail);
   }
 
   public E getFromPosition(int key) {
-    NodeForSet<E> curr = head;
+    SequentialNode<E> curr = head;
     while (curr != null && curr.key() != key) {
       curr = curr.next();
     }
     return curr.item();
   }
 
+  public Optional<E> poll() {
+    if(this.size() == 0) {
+      return Optional.empty();
+    }
+
+    SequentialNode<E> pred = head;
+    SequentialNode<E> curr = head.next();
+
+    if (head.key() == tail.key()) {
+      return Optional.empty();
+    }
+    E oldValue = curr.item();
+    pred.setNext(curr.next());
+    size--;
+    return Optional.of(oldValue);
+  }
+
 
   public List<E> getAllNodes() {
     List<E> nodeList = new ArrayList<>();
-    NodeForSet<E> curr = head;
+    SequentialNode<E> curr = head;
     while (curr != null && curr.item()!= null) {
       nodeList.add(curr.item());
       System.out.println(curr.item());
@@ -35,26 +56,31 @@ public class SequentialSet<E> {
     return nodeList;
   }
 
-  private Position<E> find(NodeForSet<E> start, int key) {
-    NodeForSet<E> pred, curr;
+  private Position<E> find(SequentialNode<E> start, int key) {
+    SequentialNode<E> pred, curr;
+    pred = start;
     curr = start;
-    do {
+    while(curr.key() < key) {
       pred = curr;
       curr = curr.next();
-    } while (curr.key() < key);  // until curr.key >= key
+    }  // until curr.key >= key
+    if (pred == curr) {
+      curr = curr.next();
+    }
     return new Position<E>(pred, curr);
   }
 
   public boolean contains(E item) {
-    NodeForSet<E> node = new SequentialNode<>(item);
+    SequentialNode<E> node = new SequentialNode<>(item, idFunction.apply(item));
     Position<E> expectedPosition = find(head, node.key());
 
     return expectedPosition.curr.key() == node.key();
   }
 
   public boolean add(E item) {
-    NodeForSet<E> node = new SequentialNode<>(item);
+    SequentialNode<E> node = new SequentialNode<>(item, idFunction.apply(item));
     Position<E> where = find(head, node.key());
+    System.out.println(where.pred.key);
     if (where.curr.key() == node.key()) {
       return false;
     } else {
@@ -66,7 +92,7 @@ public class SequentialSet<E> {
   }
 
   public boolean remove(E item) {
-    NodeForSet<E> node = new SequentialNode<>(item);
+    SequentialNode<E> node = new SequentialNode<>(item, idFunction.apply(item));
     Position<E> where = find(head, node.key());
     if (where.curr.key() > node.key()) {
       return false;
@@ -84,9 +110,9 @@ public class SequentialSet<E> {
 
   private static class Position<T> {
 
-    public final NodeForSet<T> pred, curr;
+    public final SequentialNode<T> pred, curr;
 
-    public Position(NodeForSet<T> pred, NodeForSet<T> curr) {
+    public Position(SequentialNode<T> pred, SequentialNode<T> curr) {
       this.pred = pred;
       this.curr = curr;
     }

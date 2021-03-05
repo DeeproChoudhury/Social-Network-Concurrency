@@ -8,30 +8,18 @@ import lineardatastructures.SequentialSet;
 
 public class CoarseBacklog implements Backlog {
 
-  SequentialSet<Task> coarseSet = new CoarseSet<>();
+  SequentialSet<Task> coarseSet = new CoarseSet<>(Task::getId);
 
   @Override
-  public boolean add(Task task) {
+  public void add(Task task) {
 //    Node<Task> newNode = new Node<Task>(task);
-
-    return coarseSet.add(task);
+    coarseSet.add(task);
   }
 
   @Override
   public Optional<Task> getNextTaskToProcess() {
     synchronized (this) {
-      if (coarseSet.size() == 0) {
-        return Optional.empty();
-      } else {
-        for (int i = 0; i < coarseSet.size(); i++) {
-          if (coarseSet.getFromPosition(i) != null) {
-            Task task = coarseSet.getFromPosition(i);
-            coarseSet.remove(task);
-            return Optional.of(task);
-          }
-        }
-      }
-      return Optional.empty();
+      return coarseSet.poll();
     }
   }
 

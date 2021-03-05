@@ -10,7 +10,7 @@ public class CoarseLinkedList<E> {
   private final Function<E, Integer> idFunction;
 
   public CoarseLinkedList(E data, Function<E, Integer> idFunction) {
-    head = new Node<E>(null, data);
+    head = new Node<E>(data, null);
     this.idFunction = idFunction;
     size = 0;
   }
@@ -32,7 +32,7 @@ public class CoarseLinkedList<E> {
   }
 
   public Node<E> setHead(E data) {
-    return new Node<>(head.getNext(), data);
+    return new Node<>(data, head.getNext());
   }
 
   public void incrementSize() {
@@ -44,14 +44,14 @@ public class CoarseLinkedList<E> {
     Node<E> currNode = head.getNext();
     Node<E> prevNode = head;
     if (idFunction.apply(prevNode.getElem()) > id) {
-      head = new Node<>(prevNode, input);
+      head = new Node<>(input, prevNode);
       return;
     }
     while (idFunction.apply(prevNode.getElem()) < id && prevNode.getNext() != null) {
       prevNode = prevNode.getNext();
       currNode = prevNode.getNext();
     }
-    Node<E> newNode = new Node<>(currNode, input);
+    Node<E> newNode = new Node<>(input, currNode);
     prevNode.setNext(newNode);
   }
 
@@ -59,10 +59,10 @@ public class CoarseLinkedList<E> {
     int id = idFunction.apply(input);
     Node<E> currNode = head.getNext();
     Node<E> prevNode = head;
-    if (idFunction.apply(prevNode.getData()) == id) {
+    if (idFunction.apply(prevNode.getElem()) == id) {
       head = prevNode.getNext();
     }
-    while (idFunction.apply(prevNode.getData()) != id) {
+    while (idFunction.apply(prevNode.getElem()) != id) {
       prevNode = prevNode.getNext();
       currNode = currNode.getNext();
     }

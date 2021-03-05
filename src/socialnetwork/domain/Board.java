@@ -1,7 +1,6 @@
 package socialnetwork.domain;
 
 import java.util.List;
-import java.util.Queue;
 
 public interface Board {
 
